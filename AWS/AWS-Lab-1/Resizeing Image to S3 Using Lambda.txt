@@ -1,0 +1,16 @@
+Use US West (Oregon) region for this lab
+
+Create IaM Role for AWS Service (AWS Lambda) and grant AWSLambdaBasicExecutionRole, AWSXRayDaemonWriteAccess Policies and AmazonS3ObjectLambdaExecutionRolePolicy or AmazonS3FullAccess
+
+Create 2 S3 Buckets with public Access Enabled. The name of both buckets should be same with "-resized" added to name of dest bucket. 
+upload test.jpg file in source bucket with public access enabled
+
+Create AWS Lambda Function with Python 3.7 Runtime, use existing role and assign role created earlier in lab
+Go to Function Code Option and click upload option and select Amazon S3 Location and paste "https://s3-us-west-2.amazonaws.com/us-west-2-aws-training/awsu-spl/spl-88/2.3.prod/scripts/CreateThumbnail.zip" and save
+Remember to change Handler value to "CreateThumbnail.handler" in Runtime Settings
+Add a trigger and select source S3 bucket. 
+
+
+To test the connection go to test tab of lambda function, create new event and give "Upload" name of event. Event sharing setting should be shareable and select "S3 PUT" template. 
+Change the name of your source bucket in config at 2 spots. plus also add your file name (test.jpg) which you uploaded at your source bucket. Save and Test, if the test succeeded the file would be in destination bucket.
+Now directly upload another file in source S3 bucket and check the other bucket to see the resized image
